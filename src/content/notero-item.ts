@@ -1,3 +1,4 @@
+import { Notero } from './notero';
 import { Notion } from './notion';
 import { NoteroPref, getNoteroPref } from './prefs/notero-pref';
 import { buildCollectionFullName, getDOMParser, isObject } from './utils';
@@ -50,6 +51,13 @@ export class NoteroItem {
     return this.zoteroItem
       .getCreators()
       .filter(({ creatorTypeID }) => creatorTypeID === primaryCreatorTypeID)
+      .map(NoteroItem.formatCreatorName);
+  }
+
+  public getAuthorsMultiSelect(): string[] {
+    return this.zoteroItem
+      .getCreators()
+      .filter((tag) => tag !== NoteroItem.NOTION_TAG_NAME)
       .map(NoteroItem.formatCreatorName);
   }
 

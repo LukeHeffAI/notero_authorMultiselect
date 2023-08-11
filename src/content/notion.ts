@@ -157,6 +157,14 @@ export class Notion {
         buildRequest: () => Notion.buildRichText(item.getAuthors().join('\n')),
       },
       {
+        name: 'Authors Multiselect',
+        type: 'multi_select',
+        buildRequest: () =>
+          item.getTags().map((tag) => ({
+            name: Notion.sanitizeSelectOption(tag),
+          })),
+      },
+      {
         name: 'Collections',
         type: 'multi_select',
         buildRequest: () =>
